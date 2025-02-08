@@ -121,6 +121,6 @@ class BookingResult {
     }
 
     public String getMessage() {
-        return message;
+        return message
     }
 }
