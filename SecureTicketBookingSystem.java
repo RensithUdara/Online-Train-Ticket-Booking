@@ -49,7 +49,7 @@ public class SecureTicketBookingSystem {
             return new BookingResult(false, "Not enough tickets available");
         }
 
-
+        // Atomic operation to decrement tickets
         int remainingTickets = availableTickets.addAndGet(-requestedTickets);
         if (remainingTickets < 0) {
             availableTickets.addAndGet(requestedTickets); // Rollback
@@ -64,6 +64,7 @@ public class SecureTicketBookingSystem {
     }
 
     private boolean isValidUser(String userId) {
+        // Implement actual user validation logic here
         return true;
     }
 
@@ -74,7 +75,7 @@ public class SecureTicketBookingSystem {
             return true;
         }
 
-
+        // Check if the IP address is used by another user
         for (Map.Entry<String, Set<String>> entry : userDeviceIPs.entrySet()) {
             if (!entry.getKey().equals(userId) && entry.getValue().contains(ipAddress)) {
                 return true;
